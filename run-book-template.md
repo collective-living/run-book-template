@@ -9,37 +9,47 @@ Licenced under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) !
 
 ## Service or system overview
 
-**Service or system name:** 
+**Service or system name:** Collective Services Platform
 
 ### Business overview
 
 > What business need is met by this service or system? What expectations do we have about availability and performance?
 
-_(e.g. Provides reliable automated reconciliation of logistics transactions from the previous 24 hours)_
+_Provides a way for Front of House users to check in guests, members and non-members into the Canary Wharf hotel._
 
 ### Technical overview
 
 > What kind of system is this? Web-connected order processing? Back-end batch system? Internal HTTP-based API? ETL control system?
 
-_(e.g. Internal API for order reconciliation based on Ruby and RabbitMQ, deployed in Docker containers on Kubernetes)_
+_Public-facing front end application (React-based), authenticated using Auth0. Connects to AWS Gateway for all communication, with all the business logic in Python lambdas._
 
 ### Service Level Agreements (SLAs)
 
 > What explicit or implicit expectations are there from users or clients about the availability of the service or system?
 
-_(e.g. Contractual 99.9% service availability outside of the 03:00-05:00 maintenance window)_
+_TBD_
 
 ### Service owner
 
 > Which team owns and runs this service or system?
 
-_(e.g. The *Sneaky Sharks* team (Bangalore) develops and runs this service: sneaky.sharks@company.com / *#sneaky-sharks* on Slack / Extension 9265)_
+_Product Owner   : David Sinclair_  
+_Implementation  : Amido (Consultants)_  
+_Delivery Manager: Jelena Rakita (Amido)_  
+_Tech Lead       : Ronnie Kilsbo (Amido)_  
+All available via Slack: #tccw-amido
 
 ### Contributing applications, daemons, services, middleware
 
 > Which distinct software applications, daemons, services, etc. make up the service or system? What external dependencies does it have?
 
-_(e.g. Ruby app + RabbitMQ for source messages + PostgreSQL for reconciled transactions)_
+_React - Front End_  
+_AWS Gateway: Public facing API_  
+_Auth0: Authentication for AWS Gateway_  
+_AWS Lambda: Business logic (Python). Called directly from AWS Gateway, or from AWS Step Functions. Calls AWS Step Functions, DynamoDB and or Salto_  
+_AWS Step Functions: Used to combine several (potential) long-running lambdas_  
+_AWS DynamoDB: NoSQL database used as a cache for Salto_  
+_Salto/SaltoKS/Clay: Third-party API used for access control - controls physical access to the locks_  
 
 ## System characteristics
 
